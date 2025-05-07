@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // Indica onde o Tailwind irá procurar pelas classes
+    "./src/**/*.{html,js,jsx,ts,tsx}", // Certifique-se de incluir todos os arquivos onde o Tailwind CSS será usado
   ],
   theme: {
     extend: {},

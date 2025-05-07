@@ -1,5 +1,5 @@
 // Funções para interagir com a API
-
+/*
 import axios from "axios";
 
 const api = axios.create({
@@ -36,3 +36,4 @@ export const registrarPagamento = async (pagamento) => {
     console.error("Erro ao registrar pagamento:", error);
   }
 };
+*/
