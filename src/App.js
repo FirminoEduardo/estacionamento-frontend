@@ -5,10 +5,12 @@ import Clientes from "./pages/Clientes";
 import Vagas from "./pages/Vagas";
 import Pagamentos from "./pages/Pagamentos";
 import Relatorios from "./pages/Relatorios";
+import Header from "./components/Header"; // Certifique-se de que o Header foi importado corretamente
 
 const App = () => {
   return (
     <Router>
+      <Header /> {/* O Header é renderizado aqui */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/clientes" element={<Clientes />} />

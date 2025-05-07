@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+/* Exemplo de estilo para ajustar o layout */
+body {
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;  /* Isso faz com que o conteúdo ocupe o restante da tela */
+  padding: 20px;
+}

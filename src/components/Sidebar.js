@@ -1,5 +1,5 @@
 // Menu lateral para navegação entre páginas
-
+/*
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -27,3 +27,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+*/
