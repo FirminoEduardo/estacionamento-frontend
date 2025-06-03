@@ -1,6 +1,3 @@
-// Página de vagas que permite visualizar
-// as vagas disponíveis e também cadastrar novas vagas para controle de ocupação.
-
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";

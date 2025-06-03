@@ -1,6 +1,3 @@
-// Página de pagamentos
-// Usuários realizarão pagamentos e registrar transações
-
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
@@ -9,10 +6,17 @@ const Pagamentos = () => {
   const [idCliente, setIdCliente] = useState("");
   const [valor, setValor] = useState("");
   const [tipoPagamento, setTipoPagamento] = useState("Cartão");
+  const [dataPagamento, setDataPagamento] = useState(""); // Novo campo de data de pagamento
 
   const handleSubmit = () => {
-    // Aqui você pode fazer a chamada para a API de pagamento
-    console.log("Pagamento registrado:", { idCliente, valor, tipoPagamento });
+    console.log("Pagamento registrado:", {
+      idCliente,
+      valor,
+      tipoPagamento,
+      dataPagamento,
+    });
+    // Aqui você faria a chamada para a API de pagamento, por exemplo:
+    // registrarPagamento({ idCliente, valor, tipoPagamento, dataPagamento });
   };
 
   return (
@@ -43,6 +47,13 @@ const Pagamentos = () => {
             <option value="Pix">Pix</option>
           </select>
         </div>
+        {/* Novo campo de Data de Pagamento */}
+        <InputField
+          label="Data de Pagamento"
+          type="date"
+          value={dataPagamento}
+          onChange={(e) => setDataPagamento(e.target.value)}
+        />
         <Button
           label="Registrar Pagamento"
           onClick={handleSubmit}
