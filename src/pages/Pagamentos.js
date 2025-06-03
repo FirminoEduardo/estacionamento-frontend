@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
+import { registrarPagamento } from "../services/api"; // Função para registrar o pagamento
 
 const Pagamentos = () => {
   const [idCliente, setIdCliente] = useState("");
@@ -8,21 +9,38 @@ const Pagamentos = () => {
   const [tipoPagamento, setTipoPagamento] = useState("Cartão");
   const [dataPagamento, setDataPagamento] = useState(""); // Novo campo de data de pagamento
 
-  const handleSubmit = () => {
-    console.log("Pagamento registrado:", {
-      idCliente,
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Previne o comportamento padrão de envio de formulário
+
+    const pagamento = {
       valor,
-      tipoPagamento,
-      dataPagamento,
-    });
-    // Aqui você faria a chamada para a API de pagamento, por exemplo:
-    // registrarPagamento({ idCliente, valor, tipoPagamento, dataPagamento });
+      tipo_pagamento: tipoPagamento, // Correção aqui, conforme esperado no backend
+      status_pagamento: "Pago", // Definindo um status fixo por enquanto
+      data_pagamento: dataPagamento,
+      id_cliente: idCliente, // ID do cliente
+    };
+
+    try {
+      // Chama a função que envia os dados para o backend
+      const response = await registrarPagamento(pagamento);
+
+      // Exibe a resposta no console (opcional)
+      console.log("Pagamento registrado:", response);
+
+      // Limpa os campos ou exibe uma mensagem de sucesso
+      setValor("");
+      setTipoPagamento("Cartão");
+      setDataPagamento("");
+      setIdCliente("");
+    } catch (error) {
+      console.error("Erro ao registrar pagamento:", error);
+    }
   };
 
   return (
     <div className="p-8">
       <h2 className="text-2xl font-semibold">Registro de Pagamentos</h2>
-      <form className="mt-6">
+      <form className="mt-6" onSubmit={handleSubmit}>
         <InputField
           label="ID do Cliente"
           type="text"
@@ -47,7 +65,6 @@ const Pagamentos = () => {
             <option value="Pix">Pix</option>
           </select>
         </div>
-        {/* Novo campo de Data de Pagamento */}
         <InputField
           label="Data de Pagamento"
           type="date"
@@ -56,7 +73,7 @@ const Pagamentos = () => {
         />
         <Button
           label="Registrar Pagamento"
-          onClick={handleSubmit}
+          type="submit" // Usando type="submit" ao invés de onClick para enviar o formulário
           className="mt-4"
         />
       </form>
