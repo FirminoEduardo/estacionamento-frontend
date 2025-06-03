@@ -1,21 +1,39 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
+import { cadastrarVaga } from "../services/api"; // Importe a função para cadastrar a vaga
 
 const Vagas = () => {
   const [status, setStatus] = useState("Disponível"); // Status da vaga
   const [capacidade, setCapacidade] = useState(1); // Capacidade da vaga
   const [tipoVaga, setTipoVaga] = useState("Normal"); // Tipo de vaga: Normal ou Preferencial
 
-  const handleSubmit = () => {
-    // Aqui você pode fazer a chamada para a API que cria a vaga
-    console.log("Vaga cadastrada:", { status, capacidade, tipoVaga });
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Previne o comportamento padrão de envio de formulário
+    const vaga = { status, capacidade, tipo_vaga: tipoVaga }; // Alteração para tipo_vaga conforme esperado no backend
+
+    try {
+      // Chama a função que envia os dados para o backend
+      const response = await cadastrarVaga(vaga);
+
+      // Exibe a resposta no console (opcional)
+      console.log("Vaga cadastrada:", response);
+
+      // Aqui você pode limpar os campos ou exibir uma mensagem de sucesso
+      setStatus("Disponível");
+      setCapacidade(1);
+      setTipoVaga("Normal");
+    } catch (error) {
+      console.error("Erro ao cadastrar vaga:", error);
+    }
   };
 
   return (
     <div className="p-8">
       <h2 className="text-2xl font-semibold">Cadastro de Vagas</h2>
-      <form className="mt-6">
+      <form className="mt-6" onSubmit={handleSubmit}>
+        {" "}
+        {/* Usando onSubmit ao invés de onClick */}
         <InputField
           label="Capacidade"
           type="number"
@@ -47,7 +65,7 @@ const Vagas = () => {
         </div>
         <Button
           label="Cadastrar Vaga"
-          onClick={handleSubmit}
+          type="submit" // Usando type="submit" ao invés de onClick para enviar o formulário
           className="mt-4"
         />
       </form>
