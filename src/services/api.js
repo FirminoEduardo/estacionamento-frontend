@@ -67,3 +67,45 @@ export const registrarPagamento = async (pagamento) => {
     console.error("Erro ao registrar pagamento:", error);
   }
 };
+
+// Função para buscar todas as vagas
+export const buscarVagas = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/vagas");
+    if (!response.ok) {
+      throw new Error("Erro ao buscar vagas");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar vagas:", error);
+  }
+};
+
+// Função para buscar todos os pagamentos
+export const buscarPagamentos = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/pagamentos");
+    if (!response.ok) {
+      throw new Error("Erro ao buscar pagamentos");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar pagamentos:", error);
+  }
+};
+
+// Função para buscar todos os clientes
+export const buscarClientes = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/clientes");
+    if (!response.ok) {
+      throw new Error("Erro ao buscar clientes");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar clientes:", error);
+  }
+};
